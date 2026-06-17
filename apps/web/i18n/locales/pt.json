@@ -1,6 +1,37 @@
 {
+  "nav": {
+    "home": "Início",
+    "projects": "Projetos",
+    "blog": "Blog"
+  },
   "home": {
     "title": "Desenvolvedor Full-Stack",
-    "subtitle": "Construindo aplicações web modernas com Nuxt e NestJS."
+    "subtitle": "Construindo aplicações web modernas com Nuxt e NestJS.",
+    "featured": "Projetos em destaque",
+    "viewAll": "Ver todos os projetos"
+  },
+  "projects": {
+    "title": "Projetos",
+    "subtitle": "Trabalhos selecionados, da vitrine ao código.",
+    "filterAll": "Todos",
+    "empty": "Nenhum projeto publicado ainda.",
+    "notFound": "Projeto não encontrado.",
+    "back": "Voltar aos projetos",
+    "stack": "Stack",
+    "links": "Links",
+    "repo": "Código",
+    "demo": "Demo"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artigos técnicos sobre desenvolvimento web.",
+    "empty": "Nenhum artigo publicado ainda.",
+    "notFound": "Artigo não encontrado.",
+    "back": "Voltar ao blog",
+    "readingTime": "{min} min de leitura"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Algo deu errado ao carregar o conteúdo."
   }
 }

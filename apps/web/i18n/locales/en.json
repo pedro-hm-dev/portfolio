@@ -1,6 +1,37 @@
 {
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "blog": "Blog"
+  },
   "home": {
     "title": "Full-Stack Developer",
-    "subtitle": "Building modern web applications with Nuxt and NestJS."
+    "subtitle": "Building modern web applications with Nuxt and NestJS.",
+    "featured": "Featured projects",
+    "viewAll": "View all projects"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Selected work, from showcase to source.",
+    "filterAll": "All",
+    "empty": "No published projects yet.",
+    "notFound": "Project not found.",
+    "back": "Back to projects",
+    "stack": "Stack",
+    "links": "Links",
+    "repo": "Source",
+    "demo": "Demo"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Technical articles about web development.",
+    "empty": "No published articles yet.",
+    "notFound": "Article not found.",
+    "back": "Back to blog",
+    "readingTime": "{min} min read"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong while loading the content."
   }
 }
