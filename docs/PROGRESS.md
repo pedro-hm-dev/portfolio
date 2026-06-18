@@ -1,6 +1,6 @@
 # Progresso — Portfólio Full-Stack
 
-> Último checkpoint: 2026-06-17
+> Último checkpoint: 2026-06-18
 
 ## ✅ Concluído
 
@@ -53,22 +53,27 @@
   - **Web**: `composables/usePosts.ts`; `components/PostCard.vue`; `pages/blog/index.vue` (lista) + `pages/blog/[slug].vue` (detalhe mdc + 404); link "Blog" no nav; i18n `nav.blog`/`blog.*` (inclui `readingTime` com interpolação)
   - ⚠️ Verificação ao vivo continua com o usuário (`! pnpm dev` + seed + publicar post).
 
+- **i18n de conteúdo + `hreflang` concluído** (2026-06-18) — typecheck ✅, `nuxt build` ✅:
+  - `nuxt.config.ts`: `i18n.baseUrl` (URLs absolutas p/ hreflang) + `sitemap.sources: ['/api/__sitemap__/urls']`
+  - `app.vue`: `useLocaleHead({ dir, lang, seo })` + `useHead(...)` → injeta `<html lang/dir>`, canonical, hreflang alternates (pt-BR/en-US/x-default) e `og:locale` em **todas** as páginas
+  - `server/api/__sitemap__/urls.ts`: busca `/projects` + `/posts` publicados da API e gera URLs com `_i18nTransform: true` (sitemap expande pra pt+en com alternates); `lastmod` = `updatedAt`
+  - Build gera `sitemap_index.xml` (índice multi-locale) ✅
+  - ⚠️ Verificação ao vivo com o usuário: `! pnpm dev` + seed + conferir `<link rel="alternate" hreflang>` no `<head>` e `/sitemap.xml` listando os slugs reais.
+
 ## ▶️ Próximo passo (retomar AQUI)
 
-**i18n de conteúdo + `hreflang`** — fechar a parte bilíngue da vitrine:
-- Garantir `hreflang` correto nas páginas de conteúdo (projetos/posts) e na home (alternates pt/en)
-- Conferir `useSeoMeta`/`useHead` por locale; canonical por idioma
-- Sitemap multi-locale (já temos `@nuxtjs/sitemap`) cobrindo rotas de conteúdo
-- (Conteúdo já é bilíngue via `content{pt,en}`; foco aqui é SEO/discoverability dos dois idiomas)
+**Módulo IA (Claude)** — no `apps/api`:
+- Endpoint admin para **traduzir PT→EN** (title/summary/body) — contrato já existe em `@portfolio/types` (`TranslateRequest`/`TranslateResponse`)
+- Endpoint admin para **gerar meta-description** (`MetaDescriptionRequest`/`MetaDescriptionResponse`)
+- Usar SDK `@anthropic-ai/sdk`; chave via env; guardar atrás de `JwtAuthGuard`+`@Roles('admin')`
+- Testes (mock do client Anthropic) + Swagger
 
 ## 🔜 Fila depois (ordem MVP do PRD)
 
-1. Módulo **IA** (Claude: traduzir PT→EN, gerar meta-description)
-2. Módulo **IA** (Claude: traduzir PT→EN, gerar meta-description)
-3. SEO (JSON-LD, sitemap, OG images) + polish visual/animações
-4. Painel admin (login + CRUD de projetos/posts com preview de markdown)
-5. Testes (componentes Nuxt + 1 E2E Playwright caminho-ouro) + CI verde
-6. Deploy (Vercel + Render + Atlas)
+1. SEO restante (JSON-LD) + polish visual/animações (OG images já via `nuxt-og-image`)
+2. Painel admin (login + CRUD de projetos/posts com preview de markdown)
+3. Testes (componentes Nuxt + 1 E2E Playwright caminho-ouro) + CI verde
+4. Deploy (Vercel + Render + Atlas)
 
 ## ⚠️ Notas de ambiente
 

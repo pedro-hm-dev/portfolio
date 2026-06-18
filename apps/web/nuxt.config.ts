@@ -28,6 +28,8 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: "pt",
     strategy: "prefix_except_default",
+    // Absolute base for hreflang / canonical alternate links emitted by useLocaleHead.
+    baseUrl: process.env.SITE_URL ?? "http://localhost:3000",
     locales: [
       { code: "pt", language: "pt-BR", name: "Português", file: "pt.json" },
       { code: "en", language: "en-US", name: "English", file: "en.json" },
@@ -38,6 +40,12 @@ export default defineNuxtConfig({
   site: {
     url: process.env.SITE_URL ?? "http://localhost:3000",
     name: "Pedro Maciel — Portfolio",
+  },
+
+  // Static routes get locale variants automatically (i18n integration); dynamic
+  // content routes (projects/blog slugs) come from the source endpoint below.
+  sitemap: {
+    sources: ["/api/__sitemap__/urls"],
   },
 
   runtimeConfig: {

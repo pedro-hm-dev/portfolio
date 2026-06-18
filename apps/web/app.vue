@@ -4,6 +4,11 @@ const localePath = useLocalePath();
 const colorMode = useColorMode();
 
 const otherLocale = computed(() => (locale.value === "pt" ? "en" : "pt"));
+
+// Emits <html lang/dir>, canonical + hreflang alternates (pt-BR/en-US/x-default)
+// and og:locale on every page, derived from the current route + i18n config.
+const localeHead = useLocaleHead({ dir: true, lang: true, seo: true });
+useHead(localeHead);
 </script>
 
 <template>
