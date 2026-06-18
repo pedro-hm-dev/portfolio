@@ -60,20 +60,26 @@
   - Build gera `sitemap_index.xml` (índice multi-locale) ✅
   - ⚠️ Verificação ao vivo com o usuário: `! pnpm dev` + seed + conferir `<link rel="alternate" hreflang>` no `<head>` e `/sitemap.xml` listando os slugs reais.
 
+- **Módulo IA (Claude) concluído** (2026-06-18) — typecheck ✅, build ✅, **33 testes API ✅** (6 novos):
+  - `ai/ai.service.ts` — cliente Anthropic injetado via provider `ANTHROPIC_CLIENT` (mockável nos testes); modelo via env `ANTHROPIC_MODEL` (default `claude-haiku-4-5`); `translate()` (pede JSON, parse defensivo extraindo `{...}` de fence/prosa) e `generateMetaDescription()` (trim+strip de aspas, cap 160 chars); erros do provider → `InternalServerErrorException` (500)
+  - `ai/ai.controller.ts` (`/admin/ai`, **guarded** `JwtAuthGuard`+`RolesGuard`+`@Roles('admin')`): `POST /admin/ai/translate` + `POST /admin/ai/meta-description` — **gasta a API key do dono; só o admin (conta do seed) chama**
+  - DTOs `translate.dto.ts` / `meta-description.dto.ts` (class-validator + Swagger); contratos de `@portfolio/types`
+  - `ai/ai.service.spec.ts` (6 unit, mock do client): tradução+modelo, extração de JSON em fence, JSON malformado→500, meta trim/strip, cap de tamanho, erro do provider→500
+  - `AiModule` registrado no `AppModule`; `.env.example` já tinha `ANTHROPIC_API_KEY`/`ANTHROPIC_MODEL`
+  - ⚠️ Falta ligar na UI/admin (botões "traduzir"/"gerar meta") — fica pro painel admin. Verificação ao vivo (chamar com key real) é com o usuário.
+
 ## ▶️ Próximo passo (retomar AQUI)
 
-**Módulo IA (Claude)** — no `apps/api`:
-- Endpoint admin para **traduzir PT→EN** (title/summary/body) — contrato já existe em `@portfolio/types` (`TranslateRequest`/`TranslateResponse`)
-- Endpoint admin para **gerar meta-description** (`MetaDescriptionRequest`/`MetaDescriptionResponse`)
-- Usar SDK `@anthropic-ai/sdk`; chave via env; guardar atrás de `JwtAuthGuard`+`@Roles('admin')`
-- Testes (mock do client Anthropic) + Swagger
+**SEO restante (JSON-LD)** + polish visual/animações:
+- JSON-LD: `Person`/`WebSite` na home, `CreativeWork`/`SoftwareSourceCode` nos projetos, `BlogPosting` nos posts (via `useHead` script ld+json)
+- (OG images já cobertas por `nuxt-og-image`; hreflang/sitemap já feitos)
+- Polish: micro-animações, estados de hover/transição, revisão de espaçamento
 
 ## 🔜 Fila depois (ordem MVP do PRD)
 
-1. SEO restante (JSON-LD) + polish visual/animações (OG images já via `nuxt-og-image`)
-2. Painel admin (login + CRUD de projetos/posts com preview de markdown)
-3. Testes (componentes Nuxt + 1 E2E Playwright caminho-ouro) + CI verde
-4. Deploy (Vercel + Render + Atlas)
+1. Painel admin (login + CRUD de projetos/posts com preview de markdown + botões de IA traduzir/meta)
+2. Testes (componentes Nuxt + 1 E2E Playwright caminho-ouro) + CI verde
+3. Deploy (Vercel + Render + Atlas)
 
 ## ⚠️ Notas de ambiente
 

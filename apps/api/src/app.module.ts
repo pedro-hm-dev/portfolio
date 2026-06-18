@@ -6,6 +6,7 @@ import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 import { ProjectsModule } from "./projects/projects.module";
 import { PostsModule } from "./posts/posts.module";
+import { AiModule } from "./ai/ai.module";
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { PostsModule } from "./posts/posts.module";
     AuthModule,
     ProjectsModule,
     PostsModule,
-    // Remaining feature modules (contact, ai) are added next.
+    AiModule,
+    // Remaining feature module (contact) is added next.
   ],
   controllers: [HealthController],
 })
