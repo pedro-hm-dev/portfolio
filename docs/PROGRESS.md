@@ -1,6 +1,17 @@
 # Progresso — Portfólio Full-Stack
 
-> Último checkpoint: 2026-06-18
+> Último checkpoint: 2026-06-18 — **fim da sessão do dia.**
+
+## 🛑 Onde paramos hoje (2026-06-18) — retomar amanhã
+
+Concluídos hoje (3 commits **locais**, falta o `git push`):
+- `0ee1f44` i18n + hreflang · `b42c8b2` módulo IA (admin-only) · `3845b46` JSON-LD
+
+**Retomar por:** decidir entre **polish visual + animações** ou **painel admin** (ver "▶️ Próximo passo").
+
+**Pendências do usuário (Pedro):**
+- `git push` dos 3 commits (auth do GitHub falhou na sessão)
+- Verificações ao vivo (`! pnpm dev`): hreflang no `<head>`, `/sitemap.xml` com slugs reais, módulo de IA com a `ANTHROPIC_API_KEY` real, e o JSON-LD no Rich Results Test
 
 ## ✅ Concluído
 
