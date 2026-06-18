@@ -68,12 +68,19 @@
   - `AiModule` registrado no `AppModule`; `.env.example` já tinha `ANTHROPIC_API_KEY`/`ANTHROPIC_MODEL`
   - ⚠️ Falta ligar na UI/admin (botões "traduzir"/"gerar meta") — fica pro painel admin. Verificação ao vivo (chamar com key real) é com o usuário.
 
+- **JSON-LD concluído** (2026-06-18) — typecheck ✅, `nuxt build` ✅:
+  - `composables/useJsonLd.ts` — injeta `<script type="application/ld+json">` via `useHead` (getter reativo a locale/conteúdo); adiciona `@context` automático
+  - `pages/index.vue` — `@graph` com `Person` (Pedro Maciel) + `WebSite` (usa `useSiteConfig()`)
+  - `pages/projects/[slug].vue` — `CreativeWork` (name/description/url/author, opc. image/keywords/codeRepository)
+  - `pages/blog/[slug].vue` — `BlogPosting` (headline/description/url/author, opc. image/datePublished/keywords)
+  - URLs absolutas via `useSiteConfig().url` + `route.path` (reflete prefixo de locale)
+  - ⚠️ Verificação ao vivo com o usuário (conferir o ld+json renderizado / Rich Results Test).
+
 ## ▶️ Próximo passo (retomar AQUI)
 
-**SEO restante (JSON-LD)** + polish visual/animações:
-- JSON-LD: `Person`/`WebSite` na home, `CreativeWork`/`SoftwareSourceCode` nos projetos, `BlogPosting` nos posts (via `useHead` script ld+json)
-- (OG images já cobertas por `nuxt-og-image`; hreflang/sitemap já feitos)
-- Polish: micro-animações, estados de hover/transição, revisão de espaçamento
+**Polish visual + animações** (ou pular pro painel admin se preferir):
+- Micro-animações, estados de hover/transição, revisão de espaçamento/tipografia
+- (OG images já via `nuxt-og-image`; hreflang/sitemap/JSON-LD já feitos)
 
 ## 🔜 Fila depois (ordem MVP do PRD)
 

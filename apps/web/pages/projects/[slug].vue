@@ -2,6 +2,7 @@
 const { t } = useI18n();
 const route = useRoute();
 const localePath = useLocalePath();
+const site = useSiteConfig();
 
 const slug = computed(() => String(route.params.slug));
 const { data: project, error } = await useProject(slug);
@@ -17,6 +18,17 @@ useSeoMeta({
   description: () => content.value.summary,
   ogImage: () => project.value?.coverImage,
 });
+
+useJsonLd(() => ({
+  "@type": "CreativeWork",
+  name: content.value.title,
+  description: content.value.summary,
+  url: `${site.url}${route.path}`,
+  author: { "@type": "Person", name: "Pedro Maciel", url: site.url },
+  ...(project.value?.coverImage ? { image: project.value.coverImage } : {}),
+  ...(project.value?.stack.length ? { keywords: project.value.stack.join(", ") } : {}),
+  ...(project.value?.links.repo ? { codeRepository: project.value.links.repo } : {}),
+}));
 </script>
 
 <template>

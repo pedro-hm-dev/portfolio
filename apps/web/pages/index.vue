@@ -1,11 +1,19 @@
 <script setup lang="ts">
 const { t } = useI18n();
 const localePath = useLocalePath();
+const site = useSiteConfig();
 
 useSeoMeta({
   title: () => t("home.title"),
   description: () => t("home.subtitle"),
 });
+
+useJsonLd(() => ({
+  "@graph": [
+    { "@type": "Person", name: "Pedro Maciel", url: site.url, description: t("home.subtitle") },
+    { "@type": "WebSite", name: site.name, url: site.url },
+  ],
+}));
 
 const { data: projects, status } = useProjectsList();
 const featured = computed(() => (projects.value ?? []).filter((p) => p.featured).slice(0, 3));
