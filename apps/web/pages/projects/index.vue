@@ -59,7 +59,13 @@ const filtered = computed(() => {
     </p>
 
     <div v-else class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <ProjectCard v-for="project in filtered" :key="project.id" :project="project" />
+      <ProjectCard
+          v-for="(project, i) in filtered"
+          :key="project.id"
+          :project="project"
+          class="animate-fade-in-up"
+          :style="{ animationDelay: `${i * 0.07}s` }"
+        />
     </div>
   </div>
 </template>

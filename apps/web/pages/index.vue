@@ -23,12 +23,12 @@ const showcase = computed(() => (featured.value.length ? featured.value : (proje
 <template>
   <div class="flex flex-col gap-16">
     <section class="flex flex-col items-start gap-4">
-      <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">{{ t("home.title") }}</h1>
-      <p class="max-w-2xl text-lg text-muted">{{ t("home.subtitle") }}</p>
+      <h1 class="animate-fade-in-up text-4xl font-bold tracking-tight sm:text-6xl">{{ t("home.title") }}</h1>
+      <p class="animate-fade-in-up max-w-2xl text-lg text-muted" style="animation-delay: 0.1s">{{ t("home.subtitle") }}</p>
     </section>
 
     <section v-if="status === 'pending' || showcase.length" class="flex flex-col gap-6">
-      <div class="flex items-end justify-between">
+      <div class="animate-fade-in-up flex items-end justify-between" style="animation-delay: 0.15s">
         <h2 class="text-2xl font-semibold tracking-tight">{{ t("home.featured") }}</h2>
         <ULink :to="localePath('/projects')" class="text-sm font-medium text-primary">
           {{ t("home.viewAll") }} →
@@ -40,7 +40,13 @@ const showcase = computed(() => (featured.value.length ? featured.value : (proje
       </div>
 
       <div v-else class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <ProjectCard v-for="project in showcase" :key="project.id" :project="project" />
+        <ProjectCard
+          v-for="(project, i) in showcase"
+          :key="project.id"
+          :project="project"
+          class="animate-fade-in-up"
+          :style="{ animationDelay: `${0.2 + i * 0.08}s` }"
+        />
       </div>
     </section>
   </div>

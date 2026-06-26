@@ -25,7 +25,13 @@ const { data: posts, status } = usePostsList();
     </p>
 
     <div v-else class="grid gap-6 sm:grid-cols-2">
-      <PostCard v-for="post in posts" :key="post.id" :post="post" />
+      <PostCard
+        v-for="(post, i) in posts"
+        :key="post.id"
+        :post="post"
+        class="animate-fade-in-up"
+        :style="{ animationDelay: `${i * 0.07}s` }"
+      />
     </div>
   </div>
 </template>

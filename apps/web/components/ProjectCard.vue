@@ -10,7 +10,7 @@ const content = useLocalizedContent(() => props.project.content);
 <template>
   <NuxtLink
     :to="localePath(`/projects/${project.slug}`)"
-    class="group flex flex-col overflow-hidden rounded-xl border border-default bg-elevated/50 transition hover:border-primary hover:shadow-lg"
+    class="group flex flex-col overflow-hidden rounded-xl border border-default bg-elevated/50 transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-lg"
   >
     <div class="aspect-video overflow-hidden bg-muted">
       <NuxtImg

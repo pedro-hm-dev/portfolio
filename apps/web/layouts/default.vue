@@ -13,22 +13,22 @@ const otherLocale = computed(() => (locale.value === "pt" ? "en" : "pt"));
       <nav class="flex items-center gap-3">
         <NuxtLink
           :to="localePath('/projects')"
-          class="text-sm text-muted transition hover:text-default"
-          active-class="text-default"
+          class="relative text-sm text-muted transition-colors hover:text-default after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all after:duration-200 hover:after:w-full"
+          active-class="text-default after:w-full"
         >
           {{ t("nav.projects") }}
         </NuxtLink>
         <NuxtLink
           :to="localePath('/blog')"
-          class="text-sm text-muted transition hover:text-default"
-          active-class="text-default"
+          class="relative text-sm text-muted transition-colors hover:text-default after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all after:duration-200 hover:after:w-full"
+          active-class="text-default after:w-full"
         >
           {{ t("nav.blog") }}
         </NuxtLink>
         <NuxtLink
           :to="localePath('/sobre')"
-          class="text-sm text-muted transition hover:text-default"
-          active-class="text-default"
+          class="relative text-sm text-muted transition-colors hover:text-default after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all after:duration-200 hover:after:w-full"
+          active-class="text-default after:w-full"
         >
           {{ t("nav.about") }}
         </NuxtLink>

@@ -156,14 +156,17 @@ defineExpose({ startTour });
 
 <template>
   <!-- ── Floating action button ────────────────────────────────────────────── -->
-  <button
-    v-if="!active && !revealOpen"
-    class="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-lg transition hover:opacity-90 active:scale-95"
-    @click="startTour"
-  >
-    <UIcon name="i-lucide-play" class="size-4" />
-    Tour
-  </button>
+  <div v-if="!active && !revealOpen" class="fixed bottom-6 right-6 z-40">
+    <!-- pulse ring -->
+    <span class="animate-ping-slow absolute inset-0 rounded-full bg-primary opacity-30" aria-hidden="true" />
+    <button
+      class="relative flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-lg transition hover:opacity-90 active:scale-95"
+      @click="startTour"
+    >
+      <UIcon name="i-lucide-play" class="size-4" />
+      Tour
+    </button>
+  </div>
 
   <!-- ── Tour floating card (steps 1–4) ────────────────────────────────────── -->
   <Transition name="slide-up">

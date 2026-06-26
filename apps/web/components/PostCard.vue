@@ -11,7 +11,7 @@ const content = useLocalizedContent(() => props.post.content);
 <template>
   <NuxtLink
     :to="localePath(`/blog/${post.slug}`)"
-    class="group flex flex-col gap-3 rounded-xl border border-default bg-elevated/50 p-5 transition hover:border-primary hover:shadow-lg"
+    class="group flex flex-col gap-3 rounded-xl border border-default bg-elevated/50 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-lg"
   >
     <div class="flex flex-wrap items-center gap-2 text-xs text-muted">
       <span>{{ t("blog.readingTime", { min: post.readingTime }) }}</span>
