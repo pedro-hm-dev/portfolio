@@ -1,0 +1,7 @@
+{
+  "buildCommand": "pnpm --filter web build",
+  "outputDirectory": "apps/web/.output",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "framework": "nuxtjs",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD apps/web packages"
+}
