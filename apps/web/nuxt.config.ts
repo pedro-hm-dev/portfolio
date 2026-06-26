@@ -48,6 +48,10 @@ export default defineNuxtConfig({
     sources: ["/api/__sitemap__/urls"],
   },
 
+  routeRules: {
+    "/admin/**": { ssr: false },
+  },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.API_BASE ?? "http://localhost:3001",
