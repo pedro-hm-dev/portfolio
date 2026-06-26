@@ -11,6 +11,11 @@ if (error.value || !project.value) {
   throw createError({ statusCode: 404, statusMessage: t("projects.notFound"), fatal: true });
 }
 
+onMounted(() => {
+  const session = useSessionStore();
+  session.trackProject(slug.value);
+});
+
 const content = useLocalizedContent(() => project.value!.content);
 
 useSeoMeta({

@@ -11,6 +11,11 @@ if (error.value || !post.value) {
   throw createError({ statusCode: 404, statusMessage: t("blog.notFound"), fatal: true });
 }
 
+onMounted(() => {
+  const session = useSessionStore();
+  session.trackPost(slug.value);
+});
+
 const content = useLocalizedContent(() => post.value!.content);
 
 useSeoMeta({
