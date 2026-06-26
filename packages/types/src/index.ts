@@ -115,3 +115,69 @@ export interface MetaDescriptionRequest {
 export interface MetaDescriptionResponse {
   metaDescription: string;
 }
+
+/* ---------- Contact ---------- */
+
+export interface CreateContactRequest {
+  name: string;
+  email: string;
+  message: string;
+}
+
+/* ---------- Visitor / LGPD ---------- */
+
+export interface VisitorTechnicalData {
+  userAgent?: string;
+  language?: string;
+  timezone?: string;
+  screenResolution?: string;
+  referrer?: string;
+  colorScheme?: string;
+}
+
+export interface VisitorBehavioralData {
+  pagesVisited: string[];
+  projectsViewed: string[];
+  postsViewed: string[];
+  timeOnSite: number;
+  tourCompleted: boolean;
+}
+
+export interface VisitorLocationData {
+  country?: string;
+  region?: string;
+  city?: string;
+}
+
+export interface CreateVisitorRequest {
+  name: string;
+  email: string;
+  company?: string;
+  role?: string;
+  interests?: string[];
+  isPublic: boolean;
+  consentVersion: string;
+  technicalData: VisitorTechnicalData;
+  behavioralData: VisitorBehavioralData;
+  locationData: VisitorLocationData;
+}
+
+export interface PublicVisitor {
+  id: string;
+  name: string;
+  company?: string;
+  role?: string;
+  interests: string[];
+  createdAt: string;
+}
+
+export interface Visitor extends PublicVisitor {
+  email: string;
+  isPublic: boolean;
+  consentVersion: string;
+  consentDate: string;
+  technicalData: VisitorTechnicalData;
+  behavioralData: VisitorBehavioralData;
+  locationData: VisitorLocationData;
+  updatedAt: string;
+}

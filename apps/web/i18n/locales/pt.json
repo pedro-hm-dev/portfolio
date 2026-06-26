@@ -2,7 +2,8 @@
   "nav": {
     "home": "Início",
     "projects": "Projetos",
-    "blog": "Blog"
+    "blog": "Blog",
+    "about": "Sobre"
   },
   "home": {
     "title": "Desenvolvedor Full-Stack",
@@ -29,6 +30,23 @@
     "notFound": "Artigo não encontrado.",
     "back": "Voltar ao blog",
     "readingTime": "{min} min de leitura"
+  },
+  "about": {
+    "title": "Sobre",
+    "subtitle": "Desenvolvedor full-stack apaixonado por produto, experiência de usuário e engenharia de software.",
+    "bioTitle": "Quem sou",
+    "bio": "Sou Pedro Maciel, desenvolvedor full-stack com foco em Nuxt, NestJS e TypeScript. Gosto de construir produtos completos — do banco de dados ao pixel — com atenção à qualidade de código, performance e experiência do usuário. Este portfólio é um exemplo disso: uma aplicação real com CMS próprio, autenticação completa, i18n e integração com IA.",
+    "skillsTitle": "Stack",
+    "contact": {
+      "title": "Contato",
+      "subtitle": "Tem um projeto, uma oportunidade ou só quer trocar uma ideia? Me manda uma mensagem.",
+      "name": "Nome",
+      "email": "Email",
+      "message": "Mensagem",
+      "send": "Enviar mensagem",
+      "success": "Mensagem enviada! Retorno em breve.",
+      "error": "Erro ao enviar. Tente novamente."
+    }
   },
   "common": {
     "loading": "Carregando...",

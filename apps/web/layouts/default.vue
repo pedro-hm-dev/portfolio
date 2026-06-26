@@ -25,6 +25,13 @@ const otherLocale = computed(() => (locale.value === "pt" ? "en" : "pt"));
         >
           {{ t("nav.blog") }}
         </NuxtLink>
+        <NuxtLink
+          :to="localePath('/sobre')"
+          class="text-sm text-muted transition hover:text-default"
+          active-class="text-default"
+        >
+          {{ t("nav.about") }}
+        </NuxtLink>
         <UButton variant="ghost" size="sm" @click="setLocale(otherLocale)">
           {{ otherLocale.toUpperCase() }}
         </UButton>
@@ -40,5 +47,10 @@ const otherLocale = computed(() => (locale.value === "pt" ? "en" : "pt"));
     <main class="mx-auto max-w-5xl px-6 py-12">
       <slot />
     </main>
+
+    <!-- Tour floating button + overlay (client-only to avoid SSR issues) -->
+    <ClientOnly>
+      <TourOverlay />
+    </ClientOnly>
   </div>
 </template>
