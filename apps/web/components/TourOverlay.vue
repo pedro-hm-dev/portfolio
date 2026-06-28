@@ -133,7 +133,16 @@ function skipConsent() {
 }
 
 // ── Interest chips (derived from projects viewed + manual) ────────────────────
-const suggestedInterests = ["Nuxt", "Vue", "NestJS", "TypeScript", "MongoDB", "Node.js", "Docker", "AWS"];
+const suggestedInterests = [
+  "Nuxt",
+  "Vue",
+  "NestJS",
+  "TypeScript",
+  "MongoDB",
+  "Node.js",
+  "Docker",
+  "AWS",
+];
 
 function toggleInterest(i: string) {
   const idx = consentForm.interests.indexOf(i);
@@ -156,11 +165,14 @@ defineExpose({ startTour });
 
 <template>
   <!-- ── Floating action button ────────────────────────────────────────────── -->
-  <div v-if="!active && !revealOpen" class="fixed bottom-6 right-6 z-40">
+  <div v-if="!active && !revealOpen" class="fixed right-6 bottom-6 z-40">
     <!-- pulse ring -->
-    <span class="animate-ping-slow absolute inset-0 rounded-full bg-primary opacity-30" aria-hidden="true" />
+    <span
+      class="animate-ping-slow bg-primary absolute inset-0 rounded-full opacity-30"
+      aria-hidden="true"
+    />
     <button
-      class="relative flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-lg transition hover:opacity-90 active:scale-95"
+      class="bg-primary relative flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium text-white shadow-lg transition hover:opacity-90 active:scale-95"
       @click="startTour"
     >
       <UIcon name="i-lucide-play" class="size-4" />
@@ -172,7 +184,7 @@ defineExpose({ startTour });
   <Transition name="slide-up">
     <div
       v-if="active"
-      class="fixed bottom-6 right-6 z-50 w-80 rounded-xl border border-default bg-default shadow-2xl"
+      class="border-default bg-default fixed right-6 bottom-6 z-50 w-80 rounded-xl border shadow-2xl"
     >
       <div class="flex items-start justify-between p-4 pb-3">
         <p class="text-sm font-semibold">{{ currentStep.title }}</p>
@@ -181,9 +193,9 @@ defineExpose({ startTour });
         </button>
       </div>
 
-      <p class="px-4 pb-4 text-sm text-muted leading-relaxed">{{ currentStep.text }}</p>
+      <p class="text-muted px-4 pb-4 text-sm leading-relaxed">{{ currentStep.text }}</p>
 
-      <div class="flex items-center justify-between border-t border-default px-4 py-3">
+      <div class="border-default flex items-center justify-between border-t px-4 py-3">
         <!-- Progress dots -->
         <div class="flex gap-1.5">
           <div
@@ -191,7 +203,7 @@ defineExpose({ startTour });
             :key="i"
             :class="[
               'h-1.5 rounded-full transition-all',
-              i === step ? 'w-4 bg-primary' : 'w-1.5 bg-muted',
+              i === step ? 'bg-primary w-4' : 'bg-muted w-1.5',
             ]"
           />
         </div>
@@ -210,12 +222,12 @@ defineExpose({ startTour });
   <Transition name="fade">
     <div
       v-if="revealOpen"
-      class="fixed inset-0 z-50 overflow-auto bg-background/98 backdrop-blur-sm"
+      class="bg-background/98 fixed inset-0 z-50 overflow-auto backdrop-blur-sm"
     >
       <div class="mx-auto max-w-2xl px-6 py-12">
         <!-- Close button -->
         <button
-          class="absolute right-6 top-6 text-muted hover:text-default transition"
+          class="text-muted hover:text-default absolute top-6 right-6 transition"
           @click="exitTour"
         >
           <UIcon name="i-lucide-x" class="size-5" />
@@ -224,10 +236,10 @@ defineExpose({ startTour });
         <!-- ── Step: Reveal ──────────────────────────────────────────────── -->
         <div v-if="consentStep === 'reveal'">
           <div class="mb-8">
-            <p class="text-xs font-medium uppercase tracking-widest text-primary mb-2">
+            <p class="text-primary mb-2 text-xs font-medium tracking-widest uppercase">
               Transparência de dados
             </p>
-            <h2 class="text-3xl font-bold mb-2">Uma palavra sobre dados.</h2>
+            <h2 class="mb-2 text-3xl font-bold">Uma palavra sobre dados.</h2>
             <p class="text-muted">
               Durante os seus {{ session.formatTimeOnSite() }} de visita, coletamos:
             </p>
@@ -235,43 +247,52 @@ defineExpose({ startTour });
 
           <!-- What we DID collect -->
           <div class="mb-8 space-y-3">
-            <div class="flex items-start gap-3 rounded-lg bg-success/10 border border-success/20 p-3">
-              <UIcon name="i-lucide-check-circle" class="size-4 text-success shrink-0 mt-0.5" />
+            <div
+              class="bg-success/10 border-success/20 flex items-start gap-3 rounded-lg border p-3"
+            >
+              <UIcon name="i-lucide-check-circle" class="text-success mt-0.5 size-4 shrink-0" />
               <div>
                 <p class="text-sm font-medium">Navegador e sistema</p>
-                <p class="text-xs text-muted mt-0.5">
+                <p class="text-muted mt-0.5 text-xs">
                   {{ session.technicalData.userAgent?.split(") ")[0]?.replace("(", "") || "—" }}
                 </p>
               </div>
             </div>
 
-            <div class="flex items-start gap-3 rounded-lg bg-success/10 border border-success/20 p-3">
-              <UIcon name="i-lucide-check-circle" class="size-4 text-success shrink-0 mt-0.5" />
+            <div
+              class="bg-success/10 border-success/20 flex items-start gap-3 rounded-lg border p-3"
+            >
+              <UIcon name="i-lucide-check-circle" class="text-success mt-0.5 size-4 shrink-0" />
               <div>
                 <p class="text-sm font-medium">Idioma e fuso horário</p>
-                <p class="text-xs text-muted mt-0.5">
+                <p class="text-muted mt-0.5 text-xs">
                   {{ session.technicalData.language || "—" }} ·
                   {{ session.technicalData.timezone || "—" }}
                 </p>
               </div>
             </div>
 
-            <div class="flex items-start gap-3 rounded-lg bg-success/10 border border-success/20 p-3">
-              <UIcon name="i-lucide-check-circle" class="size-4 text-success shrink-0 mt-0.5" />
+            <div
+              class="bg-success/10 border-success/20 flex items-start gap-3 rounded-lg border p-3"
+            >
+              <UIcon name="i-lucide-check-circle" class="text-success mt-0.5 size-4 shrink-0" />
               <div>
                 <p class="text-sm font-medium">Resolução e tema</p>
-                <p class="text-xs text-muted mt-0.5">
-                  {{ session.technicalData.screenResolution || "—" }} ·
-                  tema {{ session.technicalData.colorScheme || "—" }}
+                <p class="text-muted mt-0.5 text-xs">
+                  {{ session.technicalData.screenResolution || "—" }} · tema
+                  {{ session.technicalData.colorScheme || "—" }}
                 </p>
               </div>
             </div>
 
-            <div v-if="session.locationData.country" class="flex items-start gap-3 rounded-lg bg-success/10 border border-success/20 p-3">
-              <UIcon name="i-lucide-check-circle" class="size-4 text-success shrink-0 mt-0.5" />
+            <div
+              v-if="session.locationData.country"
+              class="bg-success/10 border-success/20 flex items-start gap-3 rounded-lg border p-3"
+            >
+              <UIcon name="i-lucide-check-circle" class="text-success mt-0.5 size-4 shrink-0" />
               <div>
                 <p class="text-sm font-medium">Localização aproximada</p>
-                <p class="text-xs text-muted mt-0.5">
+                <p class="text-muted mt-0.5 text-xs">
                   {{ session.locationData.city }}, {{ session.locationData.region }},
                   {{ session.locationData.country }}
                   <span class="text-warning">(via IP — enviado a ip-api.com)</span>
@@ -279,57 +300,65 @@ defineExpose({ startTour });
               </div>
             </div>
 
-            <div class="flex items-start gap-3 rounded-lg bg-success/10 border border-success/20 p-3">
-              <UIcon name="i-lucide-check-circle" class="size-4 text-success shrink-0 mt-0.5" />
+            <div
+              class="bg-success/10 border-success/20 flex items-start gap-3 rounded-lg border p-3"
+            >
+              <UIcon name="i-lucide-check-circle" class="text-success mt-0.5 size-4 shrink-0" />
               <div>
                 <p class="text-sm font-medium">Páginas visitadas nesta sessão</p>
-                <p class="text-xs text-muted mt-0.5">
+                <p class="text-muted mt-0.5 text-xs">
                   {{ session.pagesVisited.join(" → ") || "/" }}
                 </p>
               </div>
             </div>
 
-            <div class="flex items-start gap-3 rounded-lg bg-success/10 border border-success/20 p-3">
-              <UIcon name="i-lucide-check-circle" class="size-4 text-success shrink-0 mt-0.5" />
+            <div
+              class="bg-success/10 border-success/20 flex items-start gap-3 rounded-lg border p-3"
+            >
+              <UIcon name="i-lucide-check-circle" class="text-success mt-0.5 size-4 shrink-0" />
               <div>
                 <p class="text-sm font-medium">Tempo no site</p>
-                <p class="text-xs text-muted mt-0.5">{{ session.formatTimeOnSite() }}</p>
+                <p class="text-muted mt-0.5 text-xs">{{ session.formatTimeOnSite() }}</p>
               </div>
             </div>
           </div>
 
-          <p class="mb-6 text-sm font-medium text-default">
-            E isso é genuinamente tudo. Sem cookies de rastreamento, sem fingerprinting, sem pixels de
-            anúncio.
+          <p class="text-default mb-6 text-sm font-medium">
+            E isso é genuinamente tudo. Sem cookies de rastreamento, sem fingerprinting, sem pixels
+            de anúncio.
           </p>
 
           <!-- What we COULD have collected (ironic) -->
           <div class="mb-8">
-            <p class="text-sm font-medium text-muted mb-3">
+            <p class="text-muted mb-3 text-sm font-medium">
               Mas se eu seguisse o manual da maioria dos sites na internet...
             </p>
-            <div class="space-y-2 rounded-xl border border-error/20 bg-error/5 p-4">
-              <div v-for="item in [
-                'Cookies de rastreamento que vivem 12 meses no seu navegador',
-                'Pixel do Meta e Google Ads acompanhando você no resto da internet',
-                'Fingerprinting: GPU, fontes instaladas, plugins — identificação única sem cookie',
-                'Gravação de scroll, cliques e movimento do cursor (heatmaps)',
-                'Tempo exato em cada elemento da página',
-                'Venda desses dados para corretoras de dados (data brokers)',
-                'Criação de perfil inferido: renda, interesses, comportamento político',
-              ]" :key="item" class="flex items-start gap-2">
-                <UIcon name="i-lucide-x-circle" class="size-4 text-error shrink-0 mt-0.5" />
-                <p class="text-xs text-muted">{{ item }}</p>
+            <div class="border-error/20 bg-error/5 space-y-2 rounded-xl border p-4">
+              <div
+                v-for="item in [
+                  'Cookies de rastreamento que vivem 12 meses no seu navegador',
+                  'Pixel do Meta e Google Ads acompanhando você no resto da internet',
+                  'Fingerprinting: GPU, fontes instaladas, plugins — identificação única sem cookie',
+                  'Gravação de scroll, cliques e movimento do cursor (heatmaps)',
+                  'Tempo exato em cada elemento da página',
+                  'Venda desses dados para corretoras de dados (data brokers)',
+                  'Criação de perfil inferido: renda, interesses, comportamento político',
+                ]"
+                :key="item"
+                class="flex items-start gap-2"
+              >
+                <UIcon name="i-lucide-x-circle" class="text-error mt-0.5 size-4 shrink-0" />
+                <p class="text-muted text-xs">{{ item }}</p>
               </div>
             </div>
           </div>
 
-          <div class="rounded-xl border border-default bg-muted/20 p-4 mb-8">
-            <p class="text-sm text-muted">
-              <span class="font-medium text-default">A LGPD</span> (Lei Geral de Proteção de Dados)
-              garante que você tem o direito de saber o que é coletado sobre você e o direito de
-              não ter seus dados processados sem consentimento. Achei que você gostaria de ver isso
-              na prática.
+          <div class="border-default bg-muted/20 mb-8 rounded-xl border p-4">
+            <p class="text-muted text-sm">
+              <span class="text-default font-medium">A LGPD</span> (Lei Geral de Proteção de Dados)
+              garante que você tem o direito de saber o que é coletado sobre você e o direito de não
+              ter seus dados processados sem consentimento. Achei que você gostaria de ver isso na
+              prática.
             </p>
           </div>
 
@@ -342,10 +371,13 @@ defineExpose({ startTour });
         <!-- ── Step: Consent form ────────────────────────────────────────── -->
         <div v-else-if="consentStep === 'form'">
           <div class="mb-6">
-            <button class="flex items-center gap-1 text-sm text-muted hover:text-default mb-4 transition" @click="consentStep = 'reveal'">
+            <button
+              class="text-muted hover:text-default mb-4 flex items-center gap-1 text-sm transition"
+              @click="consentStep = 'reveal'"
+            >
               <UIcon name="i-lucide-arrow-left" class="size-4" /> Voltar
             </button>
-            <h2 class="text-2xl font-bold mb-2">Deixe seu rastro.</h2>
+            <h2 class="mb-2 text-2xl font-bold">Deixe seu rastro.</h2>
             <p class="text-muted text-sm">
               Compartilhe o que quiser. Seus dados ficam armazenados com a política de privacidade
               da LGPD — você pode pedir a remoção a qualquer momento em
@@ -359,7 +391,12 @@ defineExpose({ startTour });
                 <UInput v-model="consentForm.name" required placeholder="João Silva" />
               </UFormField>
               <UFormField label="Email *">
-                <UInput v-model="consentForm.email" type="email" required placeholder="joao@empresa.com" />
+                <UInput
+                  v-model="consentForm.email"
+                  type="email"
+                  required
+                  placeholder="joao@empresa.com"
+                />
               </UFormField>
             </div>
 
@@ -373,7 +410,7 @@ defineExpose({ startTour });
             </div>
 
             <UFormField label="Interesses em tecnologia">
-              <div class="flex flex-wrap gap-2 mt-1">
+              <div class="mt-1 flex flex-wrap gap-2">
                 <button
                   v-for="i in suggestedInterests"
                   :key="i"
@@ -391,17 +428,20 @@ defineExpose({ startTour });
               </div>
             </UFormField>
 
-            <div class="flex items-center gap-3 rounded-lg border border-default bg-muted/20 p-3">
-              <UToggle v-model="consentForm.isPublic" />
+            <div class="border-default bg-muted/20 flex items-center gap-3 rounded-lg border p-3">
+              <USwitch v-model="consentForm.isPublic" />
               <div>
                 <p class="text-sm font-medium">Aparecer na lista pública de visitantes</p>
-                <p class="text-xs text-muted">Seu nome e cargo ficam visíveis para outros visitantes</p>
+                <p class="text-muted text-xs">
+                  Seu nome e cargo ficam visíveis para outros visitantes
+                </p>
               </div>
             </div>
 
-            <p class="text-xs text-muted">
+            <p class="text-muted text-xs">
               Ao enviar, você consente com o armazenamento dos dados informados acima + os dados
-              técnicos passivos coletados durante a visita, conforme a LGPD (versão {{ CONSENT_VERSION }}).
+              técnicos passivos coletados durante a visita, conforme a LGPD (versão
+              {{ CONSENT_VERSION }}).
             </p>
 
             <div class="flex gap-3">
@@ -414,43 +454,53 @@ defineExpose({ startTour });
         <!-- ── Step: Public visitors ─────────────────────────────────────── -->
         <div v-else-if="consentStep === 'visitors'">
           <div class="mb-6">
-            <p class="text-xs font-medium uppercase tracking-widest text-primary mb-2">
+            <p class="text-primary mb-2 text-xs font-medium tracking-widest uppercase">
               Quem passou por aqui
             </p>
-            <h2 class="text-2xl font-bold mb-2">
-              {{ publicVisitors.length > 0 ? `${publicVisitors.length} visitantes` : "Nenhum visitante público ainda" }}
+            <h2 class="mb-2 text-2xl font-bold">
+              {{
+                publicVisitors.length > 0
+                  ? `${publicVisitors.length} visitantes`
+                  : "Nenhum visitante público ainda"
+              }}
             </h2>
             <p class="text-muted text-sm">
               Pessoas que visitaram e autorizaram exibição pública do perfil.
             </p>
           </div>
 
-          <div v-if="publicVisitors.length" class="grid gap-3 sm:grid-cols-2 mb-8">
+          <div v-if="publicVisitors.length" class="mb-8 grid gap-3 sm:grid-cols-2">
             <div
               v-for="v in publicVisitors"
               :key="v.id"
-              class="flex items-center gap-3 rounded-lg border border-default bg-muted/10 p-3"
+              class="border-default bg-muted/10 flex items-center gap-3 rounded-lg border p-3"
             >
-              <div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/15 text-sm font-semibold text-primary">
+              <div
+                class="bg-primary/15 text-primary flex size-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold"
+              >
                 {{ initials(v.name) }}
               </div>
               <div class="overflow-hidden">
                 <p class="truncate text-sm font-medium">{{ v.name }}</p>
-                <p v-if="v.role || v.company" class="truncate text-xs text-muted">
+                <p v-if="v.role || v.company" class="text-muted truncate text-xs">
                   {{ [v.role, v.company].filter(Boolean).join(" · ") }}
                 </p>
                 <div v-if="v.interests.length" class="mt-1 flex flex-wrap gap-1">
                   <span
                     v-for="i in v.interests.slice(0, 3)"
                     :key="i"
-                    class="rounded-full bg-muted px-1.5 py-0.5 text-[10px]"
-                  >{{ i }}</span>
+                    class="bg-muted rounded-full px-1.5 py-0.5 text-[10px]"
+                    >{{ i }}</span
+                  >
                 </div>
               </div>
             </div>
           </div>
 
-          <div v-else class="mb-8 rounded-xl border border-dashed border-default p-8 text-center text-muted text-sm">
+          <div
+            v-else
+            class="border-default text-muted mb-8 rounded-xl border border-dashed p-8 text-center text-sm"
+          >
             Seja o primeiro a deixar um rastro.
           </div>
 

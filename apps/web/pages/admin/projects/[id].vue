@@ -77,7 +77,10 @@ async function handleTranslate() {
 async function handleMeta(locale: "pt" | "en") {
   const c = form.content[locale];
   if (!c.title || !c.body) {
-    toast.add({ title: `Preencha título e conteúdo em ${locale.toUpperCase()} primeiro.`, color: "warning" });
+    toast.add({
+      title: `Preencha título e conteúdo em ${locale.toUpperCase()} primeiro.`,
+      color: "warning",
+    });
     return;
   }
   metaLoading[locale] = true;
@@ -137,13 +140,7 @@ async function onDelete() {
         <UButton to="/admin/projects" variant="ghost" icon="i-lucide-arrow-left" size="sm" />
         <h1 class="text-2xl font-bold">Editar Projeto</h1>
       </div>
-      <UButton
-        variant="ghost"
-        color="error"
-        icon="i-lucide-trash-2"
-        size="sm"
-        @click="onDelete"
-      >
+      <UButton variant="ghost" color="error" icon="i-lucide-trash-2" size="sm" @click="onDelete">
         Excluir
       </UButton>
     </div>
@@ -163,8 +160,8 @@ async function onDelete() {
 
             <UFormField label="Destaque na home">
               <div class="flex items-center gap-2 pt-1">
-                <UToggle v-model="form.featured" />
-                <span class="text-sm text-muted">{{ form.featured ? "Sim" : "Não" }}</span>
+                <USwitch v-model="form.featured" />
+                <span class="text-muted text-sm">{{ form.featured ? "Sim" : "Não" }}</span>
               </div>
             </UFormField>
           </div>

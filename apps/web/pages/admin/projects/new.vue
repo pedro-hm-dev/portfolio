@@ -68,7 +68,10 @@ async function handleTranslate() {
 async function handleMeta(locale: "pt" | "en") {
   const c = form.content[locale];
   if (!c.title || !c.body) {
-    toast.add({ title: `Preencha título e conteúdo em ${locale.toUpperCase()} primeiro.`, color: "warning" });
+    toast.add({
+      title: `Preencha título e conteúdo em ${locale.toUpperCase()} primeiro.`,
+      color: "warning",
+    });
     return;
   }
   metaLoading[locale] = true;
@@ -133,8 +136,8 @@ async function onSubmit() {
 
             <UFormField label="Destaque na home">
               <div class="flex items-center gap-2 pt-1">
-                <UToggle v-model="form.featured" />
-                <span class="text-sm text-muted">{{ form.featured ? "Sim" : "Não" }}</span>
+                <USwitch v-model="form.featured" />
+                <span class="text-muted text-sm">{{ form.featured ? "Sim" : "Não" }}</span>
               </div>
             </UFormField>
           </div>
